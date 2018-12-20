@@ -1,0 +1,12 @@
+import numpy as np
+import matplotlib.pylab as plt
+
+def RELU(x):
+    return np.maximum(0,x)
+
+x = np.arange(-5.0,5.0,0.1)
+y = RELU(x)
+plt.plot(x,y)
+plt.ylim(-0.1,5.1)
+plt.xlim(-5.1,5.1)
+plt.show()
