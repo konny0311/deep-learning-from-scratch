@@ -26,7 +26,7 @@ class TwoLayerNet:
         return y
 
     def loss(self, x, t):
-        y = self.predict(x, t)
+        y = self.predict(x)
 
         return cross_entropy_error(y, t)
 
@@ -35,6 +35,7 @@ class TwoLayerNet:
         y = np.argmax(y, axis=1)
         t = np.argmax(t, axis=1)
         accuracy = np.sum(y==t) / float(x.shape[0])
+        return accuracy
 
     def numerical_gradient(self, x, t):
         loss_W = lambda w: self.loss(x, t)
