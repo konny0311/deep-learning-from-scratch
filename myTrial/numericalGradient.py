@@ -4,6 +4,9 @@ def function_2(x):
     return np.sum(x**2)
 
 def numerical_gradient(f,x):
+    """
+    数値微分を行う。あるxの値の前後h(微小)での変化量を返す
+    """
     h = 1e-4
     grad = np.zeros_like(x)
 

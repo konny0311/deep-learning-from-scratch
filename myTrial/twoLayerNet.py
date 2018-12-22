@@ -1,16 +1,14 @@
-# coding: utf-8
 import sys, os
-sys.path.append(os.pardir)  # 親ディレクトリのファイルをインポートするための設定
+sys.path.append(os.pardir)
 from common.functions import *
-from common.gradient import numerical_gradient
-
+from numericalGradient import numerical_gradient
+import numpy as np
 
 class TwoLayerNet:
 
     def __init__(self, input_size, hidden_size, output_size, weight_init_std=0.01):
-        # 重みの初期化
+
         self.params = {}
-        # np.random.randn: 正規分布の乱数生成。引数はその形
         self.params['W1'] = weight_init_std * np.random.randn(input_size, hidden_size)
         self.params['b1'] = np.zeros(hidden_size)
         self.params['W2'] = weight_init_std * np.random.randn(hidden_size, output_size)
@@ -27,9 +25,8 @@ class TwoLayerNet:
 
         return y
 
-    # x:入力データ, t:教師データ
     def loss(self, x, t):
-        y = self.predict(x)
+        y = self.predict(x, t)
 
         return cross_entropy_error(y, t)
 
@@ -37,13 +34,10 @@ class TwoLayerNet:
         y = self.predict(x)
         y = np.argmax(y, axis=1)
         t = np.argmax(t, axis=1)
+        accuracy = np.sum(y==t) / float(x.shape[0])
 
-        accuracy = np.sum(y == t) / float(x.shape[0])
-        return accuracy
-
-    # x:入力データ, t:教師データ
     def numerical_gradient(self, x, t):
-        loss_W = lambda W: self.loss(x, t)
+        loss_W = lambda w: self.loss(x, t)
 
         grads = {}
         grads['W1'] = numerical_gradient(loss_W, self.params['W1'])
