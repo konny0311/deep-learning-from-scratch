@@ -16,7 +16,7 @@ t_train = t_train[:300]
 
 # Dropuoutの有無、割り合いの設定 ========================
 use_dropout = True  # Dropoutなしのときの場合はFalseに
-dropout_ratio = 0.2
+dropout_ratio = 0.15
 # ====================================================
 
 network = MultiLayerNetExtend(input_size=784, hidden_size_list=[100, 100, 100, 100, 100, 100],
